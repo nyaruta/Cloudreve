@@ -6,7 +6,7 @@ COPY . .
 
 ## Install dependencies
 RUN pacman -Syu --noconfirm
-RUN pacman -S goreleaser nodejs yarn zip --noconfirm
+RUN pacman -S goreleaser nodejs yarn zip git --noconfirm
 
 ## Build
 RUN goreleaser build --single-target --clean --output cloudreve
