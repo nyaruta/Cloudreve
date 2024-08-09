@@ -19,7 +19,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
           fetch-tags: true
 
       - name: Build and Release
