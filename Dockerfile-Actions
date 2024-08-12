@@ -10,8 +10,16 @@ RUN apt update
 RUN apt install goreleaser nodejs npm zip -y
 RUN npm install yarn -g
 
+## Install frontend dependencies
+WORKDIR /build/assets
+RUN yarn install
+RUN yarn build
+
 ## Build
-RUN goreleaser build --single-target --clean --output cloudreve
+WORKDIR /build
+RUN go mod tidy
+RUN zip -r - assets/build > assets.zip
+RUN goreleaser build --single-target --clean --skip before --output cloudreve
 
 FROM alpine:latest AS runner
 
